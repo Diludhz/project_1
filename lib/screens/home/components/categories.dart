@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:project_1/screens/cart/cart_screen.dart';
+import 'package:project_1/screens/home/components/billpage.dart';
+import 'package:project_1/screens/home/components/dailygiftpage.dart';
+import 'package:project_1/screens/home/components/flashdealpage.dart';
+import 'package:project_1/screens/home/components/gamepage.dart';
+import 'package:project_1/screens/home/components/morepage.dart';
 
 import '../../../size_config.dart';
 
 class Categories extends StatelessWidget {
+  const Categories({super.key});
+
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> categories = [
@@ -24,7 +30,41 @@ class Categories extends StatelessWidget {
           (index) => CategoryCard(
             icon: categories[index]["icon"],
             text: categories[index]["text"],
-            press: () {},
+            press: () {
+              switch (categories[index]["text"]) {
+                case "Flash Deal":
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FlashDealPage()),
+                  );
+                  break;
+                case "Bill":
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const BillPage()),
+                  );
+                  break;
+                case "Game":
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const GamePage()),
+                  );
+                  break;
+                case "Daily Gift":
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const DailyGiftPage()),
+                  );
+                  break;
+                case "More":
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MorePage()),
+                  );
+                  break;
+              }
+            },
           ),
         ),
       ),
@@ -56,12 +96,12 @@ class CategoryCard extends StatelessWidget {
               height: getProportionateScreenWidth(55),
               width: getProportionateScreenWidth(55),
               decoration: BoxDecoration(
-                color: Color(0xFFFFECDF),
+                color: const Color(0xFFFFECDF),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: SvgPicture.asset(icon!),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(text!, textAlign: TextAlign.center)
           ],
         ),
